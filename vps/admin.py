@@ -21,8 +21,8 @@ class VPSPackageAdmin(admin.ModelAdmin):
         ('Pricing', {
             'fields': ('monthly_price', 'setup_fee')
         }),
-        ('Contabo Configuration', {
-            'fields': ('contabo_image_id', 'contabo_product_id')
+        ('Cloud Provider Configuration', {
+            'fields': ('cloud_image_id', 'cloud_product_id')
         }),
         ('Limits', {
             'fields': ('max_instances_per_user',)
@@ -40,8 +40,8 @@ class VPSPackageAdmin(admin.ModelAdmin):
 class VPSInstanceAdmin(admin.ModelAdmin):
     list_display = ('hostname', 'user_profile', 'package', 'ip_address', 'status', 'is_paid', 'created_at')
     list_filter = ('status', 'is_paid', 'auto_renewal', 'package', 'created_at')
-    search_fields = ('hostname', 'user_profile__user__username', 'ip_address', 'contabo_instance_id')
-    readonly_fields = ('instance_id', 'contabo_instance_id', 'created_at', 'updated_at', 'last_accessed')
+    search_fields = ('hostname', 'user_profile__user__username', 'ip_address', 'cloud_instance_id')
+    readonly_fields = ('instance_id', 'cloud_instance_id', 'created_at', 'updated_at', 'last_accessed')
     
     fieldsets = (
         ('Instance Information', {
@@ -58,7 +58,7 @@ class VPSInstanceAdmin(admin.ModelAdmin):
             'fields': ('monthly_cost', 'next_billing_date', 'is_paid', 'auto_renewal', 'expires_at')
         }),
         ('System IDs', {
-            'fields': ('instance_id', 'contabo_instance_id'),
+            'fields': ('instance_id', 'cloud_instance_id'),
             'classes': ('collapse',)
         }),
         ('Metadata', {
@@ -107,8 +107,8 @@ class VPSActionAdmin(admin.ModelAdmin):
         ('Details', {
             'fields': ('description', 'error_message')
         }),
-        ('Contabo Tracking', {
-            'fields': ('contabo_task_id',)
+        ('Cloud Provider Tracking', {
+            'fields': ('cloud_task_id',)
         }),
         ('Timing', {
             'fields': ('created_at', 'started_at', 'completed_at', 'duration_display'),
@@ -167,7 +167,7 @@ class VPSBackupAdmin(admin.ModelAdmin):
     list_display = ('vps_instance', 'name', 'backup_type', 'status', 'size_gb', 'created_at', 'expires_at')
     list_filter = ('backup_type', 'status', 'created_at', 'expires_at')
     search_fields = ('vps_instance__hostname', 'name', 'description')
-    readonly_fields = ('contabo_backup_id', 'created_at', 'completed_at')
+    readonly_fields = ('cloud_backup_id', 'created_at', 'completed_at')
     
     fieldsets = (
         ('Backup Information', {
@@ -176,8 +176,8 @@ class VPSBackupAdmin(admin.ModelAdmin):
         ('File Information', {
             'fields': ('size_gb', 'file_path')
         }),
-        ('Contabo Information', {
-            'fields': ('contabo_backup_id',)
+        ('Cloud Provider Information', {
+            'fields': ('cloud_backup_id',)
         }),
         ('Timestamps', {
             'fields': ('created_at', 'completed_at', 'expires_at'),
@@ -201,6 +201,6 @@ class VPSBackupAdmin(admin.ModelAdmin):
     status_colored.short_description = 'Status'
 
 # Custom admin site configuration
-admin.site.site_header = 'VPS Reseller Admin'
-admin.site.site_title = 'VPS Reseller Admin Portal'
-admin.site.index_title = 'Welcome to VPS Reseller Administration'
+admin.site.site_header = 'CloudHost Pro Admin'
+admin.site.site_title = 'CloudHost Pro Admin Portal'
+admin.site.index_title = 'Bem-vindo à Administração CloudHost Pro'

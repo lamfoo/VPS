@@ -22,12 +22,12 @@ class ContaboAPIClient:
     """Contabo API client for VPS management"""
     
     def __init__(self):
-        self.client_id = settings.CONTABO_CLIENT_ID
-        self.client_secret = settings.CONTABO_CLIENT_SECRET
-        self.api_user = settings.CONTABO_API_USER
-        self.api_password = settings.CONTABO_API_PASSWORD
-        self.auth_url = settings.CONTABO_AUTH_URL
-        self.base_url = settings.CONTABO_API_BASE_URL
+        self.client_id = settings.CLOUD_API_CLIENT_ID
+        self.client_secret = settings.CLOUD_API_CLIENT_SECRET
+        self.api_user = settings.CLOUD_API_USER
+        self.api_password = settings.CLOUD_API_PASSWORD
+        self.auth_url = settings.CLOUD_API_AUTH_URL
+        self.base_url = settings.CLOUD_API_BASE_URL
         self.access_token = None
         self.token_expires_at = None
         

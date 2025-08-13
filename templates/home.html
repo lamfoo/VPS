@@ -1,191 +1,263 @@
 {% extends 'base.html' %}
 
-{% block title %}Professional VPS Hosting Solutions - VPS Reseller{% endblock %}
+{% block title %}CloudHost Pro - Hospedagem Cloud Profissional com Alta Performance{% endblock %}
 
-{% block meta_description %}Get reliable, high-performance VPS hosting with automated management. Choose from our flexible plans and scale as you grow.{% endblock %}
+{% block meta_description %}Hospedagem Cloud profissional com SSD, suporte 24/7, alta performance e preços acessíveis. Comece seu projeto hoje mesmo!{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<div class="bg-primary text-white py-5 mb-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4">Professional VPS Hosting</h1>
-                <p class="lead mb-4">
-                    Get reliable, high-performance virtual private servers with automated management, 
-                    24/7 support, and enterprise-grade infrastructure.
-                </p>
-                <div class="d-flex flex-wrap gap-3">
-                    {% if not user.is_authenticated %}
-                        <a href="{% url 'accounts:register' %}" class="btn btn-light btn-lg">
-                            <i class="bi bi-person-plus"></i> Get Started
-                        </a>
-                        <a href="#packages" class="btn btn-outline-light btn-lg">
-                            <i class="bi bi-eye"></i> View Packages
-                        </a>
-                    {% else %}
-                        <a href="{% url 'dashboard:home' %}" class="btn btn-light btn-lg">
-                            <i class="bi bi-speedometer2"></i> Dashboard
-                        </a>
-                        <a href="{% url 'vps:packages' %}" class="btn btn-outline-light btn-lg">
-                            <i class="bi bi-plus-circle"></i> Order VPS
-                        </a>
-                    {% endif %}
+<div class="position-relative overflow-hidden">
+    <div class="bg-primary" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%); padding: 6rem 0;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold text-white mb-4 fade-in">
+                        Hospedagem Cloud de <span class="text-warning">Alta Performance</span>
+                    </h1>
+                    <p class="lead text-white opacity-90 mb-4 fade-in">
+                        Servidores Cloud com SSD NVMe, suporte 24/7 em português e 99.9% de uptime garantido. 
+                        Ideal para sites, aplicações e projetos que precisam de velocidade e confiabilidade.
+                    </p>
+                    
+                    <div class="d-flex flex-wrap gap-3 mb-4 fade-in">
+                        {% if not user.is_authenticated %}
+                            <a href="{% url 'accounts:register' %}" class="btn btn-light btn-lg px-4 py-3">
+                                <i class="bi bi-rocket-takeoff"></i> Comece Grátis
+                            </a>
+                            <a href="#planos" class="btn btn-outline-light btn-lg px-4 py-3">
+                                <i class="bi bi-eye"></i> Ver Planos
+                            </a>
+                        {% else %}
+                            <a href="{% url 'dashboard:home' %}" class="btn btn-light btn-lg px-4 py-3">
+                                <i class="bi bi-speedometer2"></i> Meu Painel
+                            </a>
+                            <a href="{% url 'vps:packages' %}" class="btn btn-outline-light btn-lg px-4 py-3">
+                                <i class="bi bi-plus-circle"></i> Contratar Hospedagem
+                            </a>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Trust indicators -->
+                    <div class="d-flex flex-wrap align-items-center gap-4 text-white opacity-75">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-shield-check fs-5 me-2"></i>
+                            <small>SSL Grátis</small>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-clock fs-5 me-2"></i>
+                            <small>Setup Instantâneo</small>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-headset fs-5 me-2"></i>
+                            <small>Suporte 24/7</small>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6 text-center">
-                <i class="bi bi-server display-1 mb-4"></i>
-                <div class="row text-center">
-                    <div class="col-4">
-                        <h3 class="fw-bold">99.9%</h3>
-                        <small>Uptime</small>
-                    </div>
-                    <div class="col-4">
-                        <h3 class="fw-bold">24/7</h3>
-                        <small>Support</small>
-                    </div>
-                    <div class="col-4">
-                        <h3 class="fw-bold">SSD</h3>
-                        <small>Storage</small>
+                <div class="col-lg-6 text-center">
+                    <div class="position-relative">
+                        <i class="bi bi-cloud-lightning display-1 text-white opacity-20 position-absolute" style="top: -20px; left: 50%; transform: translateX(-50%);"></i>
+                        <div class="row text-center text-white mt-5">
+                            <div class="col-4">
+                                <div class="card bg-white bg-opacity-10 border-0 p-3">
+                                    <h2 class="fw-bold mb-1">99.9%</h2>
+                                    <small>Uptime</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card bg-white bg-opacity-10 border-0 p-3">
+                                    <h2 class="fw-bold mb-1">24/7</h2>
+                                    <small>Suporte</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card bg-white bg-opacity-10 border-0 p-3">
+                                    <h2 class="fw-bold mb-1">SSD</h2>
+                                    <small>NVMe</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Wave separator -->
+    <div class="position-absolute bottom-0 start-0 w-100" style="height: 100px; background: #fafbfc;">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+            <path d="M0,60 C300,100 900,20 1200,60 L1200,120 L0,120 Z" fill="#fafbfc"></path>
+        </svg>
     </div>
 </div>
 
 <!-- Features Section -->
-<div class="container mb-5">
-    <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-            <h2 class="display-5 fw-bold mb-4">Why Choose Our VPS Hosting?</h2>
-            <p class="lead text-muted">
-                Experience the perfect balance of performance, reliability, and affordability 
-                with our cutting-edge VPS solutions.
-            </p>
-        </div>
-    </div>
-    
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                    <i class="bi bi-lightning-charge text-primary display-4 mb-3"></i>
-                    <h5 class="card-title fw-bold">Lightning Fast Performance</h5>
-                    <p class="card-text text-muted">
-                        SSD storage, high-speed networks, and optimized configurations 
-                        ensure your applications run at peak performance.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                    <i class="bi bi-shield-check text-success display-4 mb-3"></i>
-                    <h5 class="card-title fw-bold">Enterprise Security</h5>
-                    <p class="card-text text-muted">
-                        Advanced firewalls, DDoS protection, and regular security updates 
-                        keep your data safe and secure.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                    <i class="bi bi-arrows-fullscreen text-info display-4 mb-3"></i>
-                    <h5 class="card-title fw-bold">Easy Scaling</h5>
-                    <p class="card-text text-muted">
-                        Scale your resources up or down instantly as your needs change, 
-                        with no downtime or complex migrations.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                    <i class="bi bi-headset text-warning display-4 mb-3"></i>
-                    <h5 class="card-title fw-bold">24/7 Expert Support</h5>
-                    <p class="card-text text-muted">
-                        Our experienced support team is available around the clock 
-                        to help you with any questions or issues.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                    <i class="bi bi-gear text-secondary display-4 mb-3"></i>
-                    <h5 class="card-title fw-bold">Full Root Access</h5>
-                    <p class="card-text text-muted">
-                        Complete control over your server environment with root access 
-                        and the ability to install any software you need.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center p-4">
-                    <i class="bi bi-cloud-arrow-up text-primary display-4 mb-3"></i>
-                    <h5 class="card-title fw-bold">Automated Backups</h5>
-                    <p class="card-text text-muted">
-                        Regular automated backups ensure your data is always protected 
-                        and can be restored quickly when needed.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sample Packages Section -->
-<div id="packages" class="bg-light py-5 mb-5">
-    <div class="container">
+<div class="py-5" style="background: #fafbfc;">
+    <div class="container py-5">
         <div class="row text-center mb-5">
             <div class="col-lg-8 mx-auto">
-                <h2 class="display-5 fw-bold mb-4">Choose Your Perfect Plan</h2>
+                <h2 class="display-5 fw-bold mb-4">Por que escolher a CloudHost Pro?</h2>
                 <p class="lead text-muted">
-                    From small projects to enterprise applications, we have the perfect VPS solution for you.
+                    Tecnologia de ponta, infraestrutura robusta e suporte especializado 
+                    para garantir o melhor desempenho do seu projeto.
                 </p>
             </div>
         </div>
         
         <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-lightning-charge text-primary display-5"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Performance Extrema</h5>
+                        <p class="card-text text-muted">
+                            SSD NVMe, processadores Intel Xeon e rede de alta velocidade 
+                            garantem carregamento ultrarrápido das suas páginas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-shield-check text-success display-5"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Segurança Avançada</h5>
+                        <p class="card-text text-muted">
+                            Firewall dedicado, proteção DDoS, SSL gratuito e backups automáticos 
+                            para manter seus dados sempre seguros.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-arrows-fullscreen text-info display-5"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Escalabilidade Total</h5>
+                        <p class="card-text text-muted">
+                            Aumente recursos instantaneamente conforme seu projeto cresce, 
+                            sem downtime ou complicações técnicas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-headset text-warning display-5"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Suporte Especializado</h5>
+                        <p class="card-text text-muted">
+                            Equipe técnica brasileira disponível 24/7 via chat, telefone 
+                            e ticket para resolver qualquer questão rapidamente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-secondary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-terminal text-secondary display-5"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Controle Total</h5>
+                        <p class="card-text text-muted">
+                            Acesso root completo, instale qualquer software, configure 
+                            seu ambiente exatamente como precisa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-cloud-arrow-up text-primary display-5"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Backup Automático</h5>
+                        <p class="card-text text-muted">
+                            Backups diários automáticos com restauração em 1 clique. 
+                            Seus dados sempre protegidos e recuperáveis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pricing Section -->
+<div id="planos" class="py-5">
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-4">Planos de Hospedagem Cloud</h2>
+                <p class="lead text-muted">
+                    Do iniciante ao profissional, temos o plano perfeito para seu projeto. 
+                    Comece pequeno e escale conforme necessário.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
             <!-- Starter Plan -->
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm">
+                <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-white border-0 text-center py-4">
-                        <h4 class="fw-bold">Starter</h4>
-                        <p class="text-muted mb-0">Perfect for small projects</p>
+                        <h4 class="fw-bold">Cloud Starter</h4>
+                        <p class="text-muted mb-0">Perfeito para começar</p>
                     </div>
                     <div class="card-body text-center p-4">
-                        <div class="display-4 fw-bold text-primary mb-3">$9.99</div>
-                        <p class="text-muted mb-4">/month</p>
+                        <div class="mb-4">
+                            <span class="display-4 fw-bold text-primary">R$ 29</span>
+                            <span class="text-muted">,90/mês</span>
+                        </div>
                         
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>1 CPU Core</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>2 GB RAM</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>25 GB SSD</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>1 TB Bandwidth</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>1 IPv4 Address</li>
+                        <ul class="list-unstyled mb-4 text-start">
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>1 vCPU</strong> dedicado</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>2 GB RAM</strong> DDR4</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>25 GB SSD</strong> NVMe</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>1 TB</strong> de transferência</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>1 IP</strong> dedicado</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>SSL gratuito</strong></span>
+                            </li>
                         </ul>
                         
                         {% if user.is_authenticated %}
                             <a href="{% url 'vps:packages' %}" class="btn btn-primary btn-lg w-100">
-                                Order Now
+                                Contratar Agora
                             </a>
                         {% else %}
                             <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg w-100">
-                                Get Started
+                                Começar Agora
                             </a>
                         {% endif %}
                     </div>
@@ -194,33 +266,54 @@
             
             <!-- Professional Plan -->
             <div class="col-lg-4">
-                <div class="card border-primary shadow-sm position-relative">
-                    <div class="badge bg-primary position-absolute top-0 start-50 translate-middle px-3 py-2">
-                        Most Popular
+                <div class="card border-primary shadow position-relative h-100">
+                    <div class="badge bg-primary position-absolute top-0 start-50 translate-middle px-4 py-2 fs-6">
+                        Mais Popular
                     </div>
                     <div class="card-header bg-primary text-white border-0 text-center py-4">
-                        <h4 class="fw-bold">Professional</h4>
-                        <p class="mb-0 opacity-75">Great for growing businesses</p>
+                        <h4 class="fw-bold">Cloud Pro</h4>
+                        <p class="mb-0 opacity-90">Para projetos profissionais</p>
                     </div>
                     <div class="card-body text-center p-4">
-                        <div class="display-4 fw-bold text-primary mb-3">$19.99</div>
-                        <p class="text-muted mb-4">/month</p>
+                        <div class="mb-4">
+                            <span class="display-4 fw-bold text-primary">R$ 59</span>
+                            <span class="text-muted">,90/mês</span>
+                        </div>
                         
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>2 CPU Cores</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>4 GB RAM</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>50 GB SSD</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>2 TB Bandwidth</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>1 IPv4 Address</li>
+                        <ul class="list-unstyled mb-4 text-start">
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>2 vCPUs</strong> dedicados</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>4 GB RAM</strong> DDR4</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>50 GB SSD</strong> NVMe</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>2 TB</strong> de transferência</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>1 IP</strong> dedicado</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>Backup diário</strong></span>
+                            </li>
                         </ul>
                         
                         {% if user.is_authenticated %}
                             <a href="{% url 'vps:packages' %}" class="btn btn-primary btn-lg w-100">
-                                Order Now
+                                Contratar Agora
                             </a>
                         {% else %}
                             <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg w-100">
-                                Get Started
+                                Começar Agora
                             </a>
                         {% endif %}
                     </div>
@@ -229,30 +322,51 @@
             
             <!-- Enterprise Plan -->
             <div class="col-lg-4">
-                <div class="card border-0 shadow-sm">
+                <div class="card border-0 shadow-sm h-100">
                     <div class="card-header bg-white border-0 text-center py-4">
-                        <h4 class="fw-bold">Enterprise</h4>
-                        <p class="text-muted mb-0">For high-traffic applications</p>
+                        <h4 class="fw-bold">Cloud Enterprise</h4>
+                        <p class="text-muted mb-0">Para alta demanda</p>
                     </div>
                     <div class="card-body text-center p-4">
-                        <div class="display-4 fw-bold text-primary mb-3">$39.99</div>
-                        <p class="text-muted mb-4">/month</p>
+                        <div class="mb-4">
+                            <span class="display-4 fw-bold text-primary">R$ 119</span>
+                            <span class="text-muted">,90/mês</span>
+                        </div>
                         
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>4 CPU Cores</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>8 GB RAM</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>100 GB SSD</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>4 TB Bandwidth</li>
-                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>1 IPv4 Address</li>
+                        <ul class="list-unstyled mb-4 text-start">
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>4 vCPUs</strong> dedicados</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>8 GB RAM</strong> DDR4</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>100 GB SSD</strong> NVMe</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>4 TB</strong> de transferência</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>1 IP</strong> dedicado</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span><strong>Suporte prioritário</strong></span>
+                            </li>
                         </ul>
                         
                         {% if user.is_authenticated %}
                             <a href="{% url 'vps:packages' %}" class="btn btn-primary btn-lg w-100">
-                                Order Now
+                                Contratar Agora
                             </a>
                         {% else %}
                             <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg w-100">
-                                Get Started
+                                Começar Agora
                             </a>
                         {% endif %}
                     </div>
@@ -261,38 +375,86 @@
         </div>
         
         <div class="text-center mt-5">
-            <p class="text-muted mb-3">Need a custom solution?</p>
-            <a href="{% url 'dashboard:support' %}" class="btn btn-outline-primary">
-                <i class="bi bi-chat-dots"></i> Contact Sales
+            <p class="text-muted mb-3">Precisa de algo personalizado?</p>
+            <a href="{% url 'dashboard:support' %}" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-chat-dots"></i> Falar com Especialista
             </a>
         </div>
     </div>
 </div>
 
+<!-- Trust Section -->
+<div class="bg-light py-5">
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-lg-8 mx-auto mb-5">
+                <h2 class="display-5 fw-bold mb-4">Infraestrutura de Classe Mundial</h2>
+                <p class="lead text-muted">
+                    Nossos data centers utilizam a mais avançada tecnologia para garantir 
+                    máxima performance e disponibilidade para seus projetos.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="p-4">
+                    <i class="bi bi-server text-primary display-4 mb-3"></i>
+                    <h5 class="fw-bold">Data Centers</h5>
+                    <p class="text-muted mb-0">Múltiplas localizações com redundância completa</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4">
+                    <i class="bi bi-speedometer2 text-success display-4 mb-3"></i>
+                    <h5 class="fw-bold">Rede 10Gbps</h5>
+                    <p class="text-muted mb-0">Conectividade de alta velocidade garantida</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4">
+                    <i class="bi bi-shield-check text-info display-4 mb-3"></i>
+                    <h5 class="fw-bold">Monitoramento</h5>
+                    <p class="text-muted mb-0">Supervisão 24/7 da infraestrutura</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4">
+                    <i class="bi bi-lightning text-warning display-4 mb-3"></i>
+                    <h5 class="fw-bold">SLA 99.9%</h5>
+                    <p class="text-muted mb-0">Garantia de disponibilidade e performance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- CTA Section -->
-<div class="container text-center py-5">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
-            <p class="lead text-muted mb-4">
-                Join thousands of satisfied customers who trust us with their hosting needs. 
-                Get your VPS server up and running in minutes.
-            </p>
-            {% if not user.is_authenticated %}
-                <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg me-3">
-                    <i class="bi bi-person-plus"></i> Create Account
-                </a>
-                <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary btn-lg">
-                    <i class="bi bi-box-arrow-in-right"></i> Login
-                </a>
-            {% else %}
-                <a href="{% url 'vps:packages' %}" class="btn btn-primary btn-lg me-3">
-                    <i class="bi bi-plus-circle"></i> Order Your First VPS
-                </a>
-                <a href="{% url 'dashboard:home' %}" class="btn btn-outline-primary btn-lg">
-                    <i class="bi bi-speedometer2"></i> Go to Dashboard
-                </a>
-            {% endif %}
+<div class="py-5">
+    <div class="container text-center py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-4">Pronto para começar?</h2>
+                <p class="lead text-muted mb-5">
+                    Junte-se a milhares de desenvolvedores e empresas que confiam na CloudHost Pro 
+                    para hospedar seus projetos. Configure seu servidor em menos de 60 segundos!
+                </p>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg me-3 px-5 py-3">
+                        <i class="bi bi-rocket-takeoff"></i> Criar Conta Grátis
+                    </a>
+                    <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary btn-lg px-5 py-3">
+                        <i class="bi bi-box-arrow-in-right"></i> Já tenho conta
+                    </a>
+                {% else %}
+                    <a href="{% url 'vps:packages' %}" class="btn btn-primary btn-lg me-3 px-5 py-3">
+                        <i class="bi bi-plus-circle"></i> Contratar Hospedagem
+                    </a>
+                    <a href="{% url 'dashboard:home' %}" class="btn btn-outline-primary btn-lg px-5 py-3">
+                        <i class="bi bi-speedometer2"></i> Ir para o Painel
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

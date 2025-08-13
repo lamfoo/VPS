@@ -20,9 +20,9 @@ class VPSPackage(models.Model):
     monthly_price = models.DecimalField(max_digits=10, decimal_places=2)
     setup_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
-    # Contabo configuration
-    contabo_image_id = models.CharField(max_length=100, help_text="Contabo image ID")
-    contabo_product_id = models.CharField(max_length=100, help_text="Contabo product ID")
+    # Cloud provider configuration
+    cloud_image_id = models.CharField(max_length=100, help_text="Cloud provider image ID")
+    cloud_product_id = models.CharField(max_length=100, help_text="Cloud provider product ID")
     
     # Package settings
     is_active = models.BooleanField(default=True)
@@ -59,7 +59,7 @@ class VPSInstance(models.Model):
     
     # Instance identifiers
     instance_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    contabo_instance_id = models.CharField(max_length=100, blank=True, null=True, unique=True)
+    cloud_instance_id = models.CharField(max_length=100, blank=True, null=True, unique=True)
     
     # Instance details
     hostname = models.CharField(max_length=100)
@@ -149,8 +149,8 @@ class VPSAction(models.Model):
     description = models.TextField(blank=True)
     error_message = models.TextField(blank=True)
     
-    # Contabo tracking
-    contabo_task_id = models.CharField(max_length=100, blank=True)
+    # Cloud provider tracking
+    cloud_task_id = models.CharField(max_length=100, blank=True)
     
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
@@ -231,8 +231,8 @@ class VPSBackup(models.Model):
     size_gb = models.FloatField(default=0)
     file_path = models.CharField(max_length=500, blank=True)
     
-    # Contabo backup ID
-    contabo_backup_id = models.CharField(max_length=100, blank=True)
+    # Cloud provider backup ID
+    cloud_backup_id = models.CharField(max_length=100, blank=True)
     
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
