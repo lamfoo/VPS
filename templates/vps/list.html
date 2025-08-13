@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %}Meus Servidores Cloud - CloudHost Pro{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 mb-1">Meus Servidores Cloud</h1>
+                    <p class="text-muted">Gerencie todos os seus servidores em um só lugar</p>
+                </div>
+                <a href="{% url 'vps:packages' %}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Contratar Novo Servidor
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Filters and Search -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar por nome ou IP..." id="searchInput">
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <div class="btn-group" role="group">
+                <input type="radio" class="btn-check" name="statusFilter" id="all" checked>
+                <label class="btn btn-outline-primary" for="all">Todos</label>
+                
+                <input type="radio" class="btn-check" name="statusFilter" id="active">
+                <label class="btn btn-outline-primary" for="active">Ativos</label>
+                
+                <input type="radio" class="btn-check" name="statusFilter" id="stopped">
+                <label class="btn btn-outline-primary" for="stopped">Parados</label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Servers List -->
+    <div class="row" id="serversList">
+        <!-- Empty State -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-cloud-plus display-1 text-muted opacity-50"></i>
+                    <h3 class="mt-4 text-muted">Nenhum servidor encontrado</h3>
+                    <p class="text-muted mb-4">
+                        Você ainda não possui nenhum servidor cloud ativo. <br>
+                        Que tal contratar seu primeiro servidor e começar a hospedar seus projetos?
+                    </p>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="d-grid gap-3">
+                                <a href="{% url 'vps:packages' %}" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-rocket-takeoff"></i> Ver Planos de Hospedagem
+                                </a>
+                                <a href="{% url 'dashboard:support' %}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-headset"></i> Falar com Especialista
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Benefits -->
+                    <div class="row mt-5 text-start">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3 flex-shrink-0">
+                                    <i class="bi bi-lightning text-primary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Setup Instantâneo</h6>
+                                    <small class="text-muted">Seu servidor fica pronto em menos de 60 segundos</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3 flex-shrink-0">
+                                    <i class="bi bi-shield-check text-success"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Alta Segurança</h6>
+                                    <small class="text-muted">Firewall, DDoS protection e SSL gratuito</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-info bg-opacity-10 rounded-circle p-2 me-3 flex-shrink-0">
+                                    <i class="bi bi-headset text-info"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold">Suporte 24/7</h6>
+                                    <small class="text-muted">Equipe brasileira sempre disponível</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Example Server Card (hidden by default) -->
+        <div class="col-lg-6 server-card d-none" data-status="active">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h5 class="card-title mb-1">servidor-web-01</h5>
+                            <small class="text-muted">Criado em 15/08/2024</small>
+                        </div>
+                        <span class="status-badge status-active">Ativo</span>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <small class="text-muted d-block">Plano</small>
+                            <span class="fw-semibold">Cloud Pro</span>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted d-block">IP Público</small>
+                            <span class="fw-semibold">192.168.1.100</span>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-4 text-center">
+                            <small class="text-muted d-block">CPU</small>
+                            <span class="fw-semibold">45%</span>
+                        </div>
+                        <div class="col-4 text-center">
+                            <small class="text-muted d-block">RAM</small>
+                            <span class="fw-semibold">2.1GB</span>
+                        </div>
+                        <div class="col-4 text-center">
+                            <small class="text-muted d-block">Disco</small>
+                            <span class="fw-semibold">15GB</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary btn-sm flex-fill">
+                            <i class="bi bi-gear"></i> Gerenciar
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-terminal"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Ações em Lote</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="text-muted mb-3">Selecione servidores para executar ações em lote:</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-outline-success btn-sm" disabled>
+                                    <i class="bi bi-play"></i> Iniciar
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" disabled>
+                                    <i class="bi bi-pause"></i> Parar
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" disabled>
+                                    <i class="bi bi-arrow-clockwise"></i> Reiniciar
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" disabled>
+                                    <i class="bi bi-cloud-download"></i> Backup
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted mb-3">Monitoramento:</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="#" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-graph-up"></i> Estatísticas
+                                </a>
+                                <a href="#" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-clock-history"></i> Logs
+                                </a>
+                                <a href="#" class="btn btn-outline-secondary btn-sm">
+                                    <i class="bi bi-exclamation-triangle"></i> Alertas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const cards = document.querySelectorAll('.server-card');
+    
+    cards.forEach(card => {
+        const serverName = card.querySelector('.card-title').textContent.toLowerCase();
+        const serverIP = card.querySelector('.fw-semibold:last-of-type').textContent.toLowerCase();
+        
+        if (serverName.includes(searchTerm) || serverIP.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+// Status filter
+document.querySelectorAll('input[name="statusFilter"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const filterValue = this.id;
+        const cards = document.querySelectorAll('.server-card');
+        
+        cards.forEach(card => {
+            if (filterValue === 'all') {
+                card.style.display = 'block';
+            } else {
+                const cardStatus = card.getAttribute('data-status');
+                card.style.display = cardStatus === filterValue ? 'block' : 'none';
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
