@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+
+{% block title %}Administração de Servidores - CloudHost Pro{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 mb-1">Administração de Servidores Cloud</h1>
+                    <p class="text-muted">Gerencie instâncias da API da Contabo e configure preços</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="syncContaboBtn">
+                        <i class="bi bi-arrow-clockwise"></i> Sincronizar API Contabo
+                    </button>
+                    <a href="/admin/vps/" class="btn btn-outline-primary">
+                        <i class="bi bi-gear"></i> Admin Django
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- API Status -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="alert alert-info">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-info-circle me-3"></i>
+                    <div>
+                        <strong>Status da API Contabo:</strong> 
+                        <span id="apiStatus" class="badge bg-secondary">Verificando...</span>
+                        <br>
+                        <small>Última sincronização: <span id="lastSync">Nunca</span></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Stats -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted fw-normal mb-1">Total de Instâncias</h6>
+                            <h3 class="mb-0" id="totalInstances">0</h3>
+                        </div>
+                        <div class="text-primary">
+                            <i class="bi bi-cloud display-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="card card-stats success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted fw-normal mb-1">Instâncias Ativas</h6>
+                            <h3 class="mb-0" id="activeInstances">0</h3>
+                        </div>
+                        <div class="text-success">
+                            <i class="bi bi-cloud-check display-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="card card-stats warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted fw-normal mb-1">Pendentes</h6>
+                            <h3 class="mb-0" id="pendingInstances">0</h3>
+                        </div>
+                        <div class="text-warning">
+                            <i class="bi bi-clock display-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="card card-stats">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="text-muted fw-normal mb-1">Receita Mensal</h6>
+                            <h3 class="mb-0" id="monthlyRevenue">R$ 0</h3>
+                        </div>
+                        <div class="text-info">
+                            <i class="bi bi-currency-dollar display-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Instances from Contabo API -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h5 class="card-title mb-0">Instâncias da API Contabo</h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-secondary" onclick="filterInstances('all')">Todas</button>
+                                <button class="btn btn-outline-success" onclick="filterInstances('running')">Ativas</button>
+                                <button class="btn btn-outline-warning" onclick="filterInstances('pending')">Pendentes</button>
+                                <button class="btn btn-outline-danger" onclick="filterInstances('stopped')">Paradas</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="instancesList">
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </div>
+                            <p class="mt-3 text-muted">Buscando instâncias da API Contabo...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pricing Configuration -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Configuração de Preços</h6>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">Configure os preços de revenda para cada tipo de instância:</p>
+                    
+                    <div id="pricingConfig">
+                        <div class="mb-3">
+                            <label class="form-label">Margem de Lucro (%)</label>
+                            <input type="number" class="form-control" value="30" min="0" max="100">
+                            <div class="form-text">Margem padrão aplicada sobre o preço da Contabo</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Preço Mínimo (R$)</label>
+                            <input type="number" class="form-control" value="29.90" min="0" step="0.01">
+                        </div>
+                        
+                        <button class="btn btn-primary btn-sm w-100">
+                            <i class="bi bi-check-circle"></i> Aplicar Configurações
+                        </button>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-info btn-sm">
+                            <i class="bi bi-graph-up"></i> Relatório de Vendas
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-download"></i> Exportar Dados
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Ações Rápidas</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success btn-sm">
+                            <i class="bi bi-plus-circle"></i> Nova Instância
+                        </button>
+                        <button class="btn btn-outline-warning btn-sm">
+                            <i class="bi bi-arrow-clockwise"></i> Reiniciar Selecionadas
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-power"></i> Parar Selecionadas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Simulate API calls (in real implementation, these would be actual API calls)
+document.addEventListener('DOMContentLoaded', function() {
+    loadContaboInstances();
+    checkAPIStatus();
+});
+
+function loadContaboInstances() {
+    // Simulate API call delay
+    setTimeout(() => {
+        const instancesList = document.getElementById('instancesList');
+        instancesList.innerHTML = `
+            <div class="text-center py-4">
+                <i class="bi bi-cloud-slash display-4 text-muted opacity-50"></i>
+                <h5 class="mt-3 text-muted">Nenhuma instância encontrada</h5>
+                <p class="text-muted mb-4">
+                    Configure suas credenciais da API Contabo para sincronizar as instâncias automaticamente.
+                </p>
+                <button class="btn btn-primary" onclick="configureAPI()">
+                    <i class="bi bi-gear"></i> Configurar API
+                </button>
+            </div>
+        `;
+        
+        // Update stats
+        document.getElementById('totalInstances').textContent = '0';
+        document.getElementById('activeInstances').textContent = '0';
+        document.getElementById('pendingInstances').textContent = '0';
+        document.getElementById('monthlyRevenue').textContent = 'R$ 0,00';
+    }, 2000);
+}
+
+function checkAPIStatus() {
+    const statusElement = document.getElementById('apiStatus');
+    const lastSyncElement = document.getElementById('lastSync');
+    
+    // Simulate API status check
+    setTimeout(() => {
+        statusElement.textContent = 'Conectado';
+        statusElement.className = 'badge bg-success';
+        lastSyncElement.textContent = new Date().toLocaleString('pt-BR');
+    }, 1000);
+}
+
+function syncContabo() {
+    const btn = document.getElementById('syncContaboBtn');
+    const originalText = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="bi bi-arrow-clockwise spin"></i> Sincronizando...';
+    btn.disabled = true;
+    
+    // Simulate sync
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        loadContaboInstances();
+        
+        // Show success message
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-success alert-dismissible fade show';
+        alert.innerHTML = `
+            <i class="bi bi-check-circle-fill me-2"></i>
+            Sincronização concluída com sucesso!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.querySelector('.container-fluid').insertBefore(alert, document.querySelector('.row'));
+    }, 3000);
+}
+
+function filterInstances(status) {
+    // Implementation for filtering instances
+    console.log('Filtering instances by status:', status);
+}
+
+function configureAPI() {
+    alert('Redirecionando para configurações da API...');
+    // In real implementation, redirect to API configuration page
+}
+
+// Add click handler to sync button
+document.getElementById('syncContaboBtn').addEventListener('click', syncContabo);
+
+// Add CSS for spinning animation
+const style = document.createElement('style');
+style.textContent = `
+    .spin {
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);
+</script>
+{% endblock %}
