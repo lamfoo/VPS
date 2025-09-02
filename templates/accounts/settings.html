@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Configurações - CloudHost Pro{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h3 mb-4">Configurações da Conta</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Configurações Gerais</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Idioma</label>
+                        <select class="form-select">
+                            <option selected>Português (Brasil)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fuso Horário</label>
+                        <select class="form-select">
+                            <option selected>América/São_Paulo</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="notifications">
+                        <label class="form-check-label" for="notifications">
+                            Receber notificações por email
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Segurança</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary">Alterar Senha</button>
+                        <button class="btn btn-outline-secondary">Autenticação 2FA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

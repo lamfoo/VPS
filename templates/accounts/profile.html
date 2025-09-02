@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Meu Perfil - CloudHost Pro{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h3 mb-4">Meu Perfil</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Informações Pessoais</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nome</label>
+                                <input type="text" class="form-control" value="{{ user.first_name|default:'' }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" value="{{ user.last_name|default:'' }}">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" class="form-control" value="{{ user.email }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nome de usuário</label>
+                            <input type="text" class="form-control" value="{{ user.username }}" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Estatísticas da Conta</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Servidores Ativos</span>
+                        <span class="fw-bold">0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Tickets Abertos</span>
+                        <span class="fw-bold">0</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Membro desde</span>
+                        <span class="fw-bold">{{ user.date_joined|date:"M Y" }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Entrar - CloudHost Pro{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="row g-0 min-vh-100">
+        <!-- Left side - Form -->
+        <div class="col-lg-6 d-flex align-items-center">
+            <div class="w-100 p-5">
+                <div class="mx-auto" style="max-width: 400px;">
+                    <div class="text-center mb-4">
+                        <h1 class="h3 mb-3 fw-bold">Entrar em sua conta</h1>
+                        <p class="text-muted">Acesse seu painel de controle CloudHost Pro</p>
+                    </div>
+                    
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Usuário ou senha incorretos. Tente novamente.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endif %}
+                    
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário ou E-mail</label>
+                            <input type="text" class="form-control form-control-lg" id="username" name="username" 
+                                   value="{{ form.username.value|default:'' }}" required>
+                            <div class="invalid-feedback">Por favor, informe seu usuário ou e-mail.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye" id="toggleIcon"></i>
+                                </button>
+                            </div>
+                            <div class="invalid-feedback">Por favor, informe sua senha.</div>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+                            <label class="form-check-label" for="remember_me">
+                                Manter-me conectado
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-box-arrow-in-right"></i> Entrar
+                        </button>
+                        
+                        <div class="text-center">
+                            <a href="#" class="text-primary text-decoration-none mb-3 d-block">
+                                Esqueceu sua senha?
+                            </a>
+                            <p class="mb-0 text-muted">
+                                Não tem uma conta? 
+                                <a href="{% url 'accounts:register' %}" class="text-primary text-decoration-none">Criar conta grátis</a>
+                            </p>
+                        </div>
+                    </form>
+                    
+                    <!-- Quick access for demo -->
+                    <div class="mt-4 pt-4 border-top">
+                        <h6 class="text-muted text-center mb-3">Acesso rápido para demonstração</h6>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="fillDemo('admin', 'admin123')">
+                                <i class="bi bi-person-gear"></i> Login como Admin
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="fillDemo('cliente', 'cliente123')">
+                                <i class="bi bi-person"></i> Login como Cliente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right side - Features -->
+        <div class="col-lg-6 d-none d-lg-block position-relative">
+            <div class="h-100 d-flex align-items-center justify-content-center text-white" 
+                 style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);">
+                <div class="text-center p-5">
+                    <i class="bi bi-shield-lock display-1 mb-4 opacity-75"></i>
+                    <h2 class="display-5 fw-bold mb-4">Acesso Seguro</h2>
+                    <p class="lead mb-4 opacity-90">
+                        Sua conta está protegida com as melhores práticas de segurança 
+                        e criptografia de ponta a ponta.
+                    </p>
+                    
+                    <div class="row text-center mt-5">
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <span>Autenticação segura</span>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <span>Dados criptografados</span>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <span>Monitoramento 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const password = document.getElementById('password');
+    const icon = document.getElementById('toggleIcon');
+    
+    if (password.type === 'password') {
+        password.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+    } else {
+        password.type = 'password';
+        icon.className = 'bi bi-eye';
+    }
+});
+
+// Demo login function
+function fillDemo(username, password) {
+    document.getElementById('username').value = username;
+    document.getElementById('password').value = password;
+}
+
+// Form validation
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
+{% endblock %}

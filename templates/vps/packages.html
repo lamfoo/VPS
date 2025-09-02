@@ -1,0 +1,348 @@
+{% extends 'base.html' %}
+
+{% block title %}Planos de Hospedagem Cloud - CloudHost Pro{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="py-5 mb-5" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);">
+    <div class="container text-center text-white">
+        <h1 class="display-4 fw-bold mb-4">Escolha seu Plano de Hospedagem Cloud</h1>
+        <p class="lead mb-4 opacity-90">
+            Servidores de alta performance com SSD NVMe, suporte 24/7 e infraestrutura escalável
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex justify-content-center gap-4 text-sm">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        <span>Setup em 60 segundos</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        <span>SSL gratuito</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        <span>Backup automático</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pricing Plans -->
+<div class="container mb-5">
+    <div class="row g-4">
+        <!-- Starter Plan -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 text-center py-4">
+                    <h4 class="fw-bold">Cloud Starter</h4>
+                    <p class="text-muted mb-0">Ideal para projetos pessoais</p>
+                </div>
+                <div class="card-body text-center p-4">
+                    <div class="mb-4">
+                        <span class="display-4 fw-bold text-primary">R$ 29</span>
+                        <span class="text-muted">,90/mês</span>
+                    </div>
+                    
+                    <ul class="list-unstyled mb-4 text-start">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>1 vCPU</strong> dedicado Intel Xeon</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>2 GB RAM</strong> DDR4 ECC</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>25 GB SSD</strong> NVMe</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>1 TB</strong> de transferência</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>1 IP</strong> público dedicado</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>SSL gratuito</strong> Let's Encrypt</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Painel cPanel</strong> incluso</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Suporte 24/7</strong></span>
+                        </li>
+                    </ul>
+                    
+                    {% if user.is_authenticated %}
+                        <a href="#" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-cart-plus"></i> Contratar Agora
+                        </a>
+                    {% else %}
+                        <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-person-plus"></i> Criar Conta e Contratar
+                        </a>
+                    {% endif %}
+                    
+                    <small class="text-muted">Setup gratuito • Sem taxa de configuração</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Professional Plan (Most Popular) -->
+        <div class="col-lg-4">
+            <div class="card border-primary shadow position-relative h-100">
+                <div class="badge bg-primary position-absolute top-0 start-50 translate-middle px-4 py-2 fs-6">
+                    <i class="bi bi-star-fill"></i> Mais Popular
+                </div>
+                <div class="card-header bg-primary text-white border-0 text-center py-4">
+                    <h4 class="fw-bold">Cloud Pro</h4>
+                    <p class="mb-0 opacity-90">Para projetos profissionais</p>
+                </div>
+                <div class="card-body text-center p-4">
+                    <div class="mb-4">
+                        <span class="display-4 fw-bold text-primary">R$ 59</span>
+                        <span class="text-muted">,90/mês</span>
+                        <div class="small text-success fw-bold">Economize 20% no anual</div>
+                    </div>
+                    
+                    <ul class="list-unstyled mb-4 text-start">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>2 vCPUs</strong> dedicados Intel Xeon</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>4 GB RAM</strong> DDR4 ECC</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>50 GB SSD</strong> NVMe</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>2 TB</strong> de transferência</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>1 IP</strong> público dedicado</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Backup diário</strong> automático</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Monitoring 24/7</strong></span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Suporte prioritário</strong></span>
+                        </li>
+                    </ul>
+                    
+                    {% if user.is_authenticated %}
+                        <a href="#" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-cart-plus"></i> Contratar Agora
+                        </a>
+                    {% else %}
+                        <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-person-plus"></i> Criar Conta e Contratar
+                        </a>
+                    {% endif %}
+                    
+                    <small class="text-muted">Setup gratuito • Migração gratuita</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enterprise Plan -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 text-center py-4">
+                    <h4 class="fw-bold">Cloud Enterprise</h4>
+                    <p class="text-muted mb-0">Para alta demanda</p>
+                </div>
+                <div class="card-body text-center p-4">
+                    <div class="mb-4">
+                        <span class="display-4 fw-bold text-primary">R$ 119</span>
+                        <span class="text-muted">,90/mês</span>
+                    </div>
+                    
+                    <ul class="list-unstyled mb-4 text-start">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>4 vCPUs</strong> dedicados Intel Xeon</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>8 GB RAM</strong> DDR4 ECC</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>100 GB SSD</strong> NVMe</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>4 TB</strong> de transferência</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>1 IP</strong> público dedicado</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Backup automático</strong></span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>Suporte VIP</strong></span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-success me-3"></i>
+                            <span><strong>SLA 99.99%</strong></span>
+                        </li>
+                    </ul>
+                    
+                    {% if user.is_authenticated %}
+                        <a href="#" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-cart-plus"></i> Contratar Agora
+                        </a>
+                    {% else %}
+                        <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg w-100 mb-3">
+                            <i class="bi bi-person-plus"></i> Criar Conta e Contratar
+                        </a>
+                    {% endif %}
+                    
+                    <small class="text-muted">Setup gratuito • Consultoria incluída</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Comparison -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-4">Compare os Recursos</h2>
+            <p class="lead text-muted">Todos os planos incluem nossa infraestrutura premium e suporte especializado</p>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr class="border-bottom">
+                        <th class="fw-bold">Recursos</th>
+                        <th class="text-center fw-bold">Starter</th>
+                        <th class="text-center fw-bold text-primary">Pro</th>
+                        <th class="text-center fw-bold">Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>vCPUs dedicados</td>
+                        <td class="text-center">1</td>
+                        <td class="text-center">2</td>
+                        <td class="text-center">4</td>
+                    </tr>
+                    <tr>
+                        <td>Memória RAM</td>
+                        <td class="text-center">2 GB</td>
+                        <td class="text-center">4 GB</td>
+                        <td class="text-center">8 GB</td>
+                    </tr>
+                    <tr>
+                        <td>Armazenamento SSD</td>
+                        <td class="text-center">25 GB</td>
+                        <td class="text-center">50 GB</td>
+                        <td class="text-center">100 GB</td>
+                    </tr>
+                    <tr>
+                        <td>Transferência mensal</td>
+                        <td class="text-center">1 TB</td>
+                        <td class="text-center">2 TB</td>
+                        <td class="text-center">4 TB</td>
+                    </tr>
+                    <tr>
+                        <td>SSL gratuito</td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Backup automático</td>
+                        <td class="text-center"><i class="bi bi-dash-circle text-muted"></i></td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Suporte prioritário</td>
+                        <td class="text-center"><i class="bi bi-dash-circle text-muted"></i></td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                        <td class="text-center"><i class="bi bi-check-circle-fill text-success"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="text-center mb-5">Perguntas Frequentes</h2>
+            
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Quanto tempo leva para ativar meu servidor?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Seu servidor Cloud é ativado automaticamente em até 60 segundos após a confirmação do pagamento.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Posso fazer upgrade do meu plano a qualquer momento?
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Sim! Você pode fazer upgrade instantâneo do seu plano sem downtime. A diferença será cobrada proporcionalmente.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Que sistemas operacionais posso instalar?
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Oferecemos Ubuntu, CentOS, Debian, Windows Server e outras distribuições Linux populares.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
